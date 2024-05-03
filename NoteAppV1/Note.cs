@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
@@ -11,7 +12,7 @@ namespace NoteAppV1
     /// <summary>
     /// Класс "Заметка"
     /// </summary>
-    public class Note : ICloneable
+    public class Note : ICloneable, INotifyPropertyChanged
     {
         private string _name;
         private NoteCategory _category;
@@ -31,6 +32,7 @@ namespace NoteAppV1
                 {
                     _name = value;
                     _lastModifiedTime = DateTime.Now;
+                    OnPropertyChanged(nameof(Name));
                 }
             }
         }
@@ -45,6 +47,7 @@ namespace NoteAppV1
             {
                 _category = value;
                 _lastModifiedTime = DateTime.Now;
+                OnPropertyChanged(nameof(Category));
             }
         }
 
@@ -58,6 +61,7 @@ namespace NoteAppV1
             {
                 _text = value;
                 _lastModifiedTime = DateTime.Now;
+                OnPropertyChanged(nameof(Text));
             }
         }
 
@@ -91,7 +95,7 @@ namespace NoteAppV1
 
         public Note(string _name, string _category, string _text)
         {
-            this._name = "Без названия";
+            this._name = _name;
             this._category = (NoteCategory)Enum.Parse(typeof(NoteCategory), _category);
             this._text = _text;
             _createTime = DateTime.Now;
@@ -104,6 +108,13 @@ namespace NoteAppV1
         public object Clone()
         {
             return this.MemberwiseClone();
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

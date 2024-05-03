@@ -17,7 +17,9 @@ namespace NoteAppV1UI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Main_Form());
+            
+            /*
             // Создание объекта заметки
             Note note1 = new Note("Заголовок заметки 1", "Категория 1", "Текст заметки 1"); 
             //Note note2 = new Note("Заголовок заметки 2", "Категория 2", "Текст заметки 2");
@@ -25,6 +27,7 @@ namespace NoteAppV1UI
             // Создание объекта проекта и добавление заметок
             Project project = new Project();
             project.AddNote(note1);
+            
             //project.AddNote(note2);
 
             // Сохранение проекта в файл
@@ -46,6 +49,7 @@ namespace NoteAppV1UI
             {
                 Console.WriteLine("Не удалось загрузить проект.");
             }
+            */
         }
     }
 }

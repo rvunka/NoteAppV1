@@ -19,4 +19,10 @@ namespace NoteAppV1
         Финансы,
         Разное
     }
+
+    public enum FormMode
+    {
+        Add,
+        Edit
+    }
 }

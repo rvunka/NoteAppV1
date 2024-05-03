@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,14 @@ namespace NoteAppV1
     /// <summary>
     /// Класс "Проект"
     /// </summary>
-    public class Project
+    public static class Project
     {
-        private List<Note> notes;
+        private static BindingList<Note> notes;
 
         /// <summary>
         /// Список заметок в проекте.
         /// </summary>
-        public List<Note> Notes
+        public static BindingList<Note> Notes
         {
             get { return notes; }
         }
@@ -24,16 +25,16 @@ namespace NoteAppV1
         /// <summary>
         /// Инициализирует новый экземпляр класса Project.
         /// </summary>
-        public Project()
+        static Project()
         {
-            notes = new List<Note>();
+            notes = new BindingList<Note>();
         }
 
         /// <summary>
         /// Добавляет заметку в проект.
         /// </summary>
         /// <param name="note">Заметка для добавления.</param>
-        public void AddNote(Note note)
+        public static void AddNote(Note note)
         {
             notes.Add(note);
         }
@@ -42,7 +43,7 @@ namespace NoteAppV1
         /// Удаляет заметку из проекта.
         /// </summary>
         /// <param name="note">Заметка для удаления.</param>
-        public void RemoveNote(Note note)
+        public static void RemoveNote(Note note)
         {
             notes.Remove(note);
         }

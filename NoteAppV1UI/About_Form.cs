@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing; 
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NoteAppV1;
 
 namespace NoteAppV1UI
 {
-    public partial class Form1 : Form
+    public partial class About_Form : Form
     {
-        public Form1()
+        public About_Form()
         {
             InitializeComponent();
         }
