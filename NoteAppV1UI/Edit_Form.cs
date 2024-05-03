@@ -18,14 +18,14 @@ namespace NoteAppV1UI
         public Edit_Form(FormMode mode)
         {
             InitializeComponent();
-            comboBox1.DataSource = Enum.GetValues(typeof(NoteCategory));
+            comboBoxCategory.DataSource = Enum.GetValues(typeof(NoteCategory));
             _mode = mode;
         }
 
         public Edit_Form(FormMode mode, Note selectedItem)
         {
             InitializeComponent();
-            comboBox1.DataSource = Enum.GetValues(typeof(NoteCategory));
+            comboBoxCategory.DataSource = Enum.GetValues(typeof(NoteCategory));
             _mode = mode;
             _selectedItem = selectedItem;   
         }
@@ -34,17 +34,23 @@ namespace NoteAppV1UI
         {
             if (_mode == FormMode.Add)
             {
-                Project.AddNote(new Note(textBox1.Text, comboBox1.Text, richTextBox1.Text));
+                Project.AddNote(new Note(textBoxTitle.Text, comboBoxCategory.Text, richTextBox1.Text));
             }
 
             if (_mode == FormMode.Edit)
             {
-                _selectedItem.Name = textBox1.Text;
+                _selectedItem.Name = textBoxTitle.Text;
                 _selectedItem.Text = richTextBox1.Text;
-                _selectedItem.Category = (NoteCategory)Enum.Parse(typeof(NoteCategory), comboBox1.Text);
+                _selectedItem.Category = (NoteCategory)Enum.Parse(typeof(NoteCategory), comboBoxCategory.Text);
                 
             }
             this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }

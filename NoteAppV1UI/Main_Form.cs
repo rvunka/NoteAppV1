@@ -21,8 +21,8 @@ namespace NoteAppV1UI
             InitializeComboBoxWithCategories();
             //comboBox1.DataSource = Enum.GetValues(typeof(NoteCategory));
             FilterNotesByCategory(NoteCategory.Работа);
-            listBox1.DataSource = Project.Notes;
-            listBox1.DisplayMember = "Name";
+            listBoxNotes.DataSource = Project.Notes;
+            listBoxNotes.DisplayMember = "Name";
             UpdateNoteProperties();
         }
 
@@ -39,18 +39,18 @@ namespace NoteAppV1UI
             }
 
             // Установка списка как источника данных для ComboBox
-            comboBox1.DataSource = categories;
+            comboBoxCategory.DataSource = categories;
         }
 
         public void UpdateNoteProperties()
         {
-            if (listBox1.SelectedItem != null)
+            if (listBoxNotes.SelectedItem != null)
             {
-                Note selectedNote = listBox1.SelectedItem as Note;
-                label2.Text = selectedNote.Name;
-                label4.Text = selectedNote.Category.ToString();
+                Note selectedNote = listBoxNotes.SelectedItem as Note;
+                labelTitle.Text = selectedNote.Name;
+                labelCategory.Text = selectedNote.Category.ToString();
                 richTextBox1.Text = selectedNote.Text;
-                dateTimePicker2.Value = selectedNote.CreateTime;
+                dateTimeModified.Value = selectedNote.CreateTime;
             }
         }
 
@@ -64,8 +64,8 @@ namespace NoteAppV1UI
                     _filteredNotes.Add(note);
                 }
             }
-            listBox1.DataSource = _filteredNotes;
-            listBox1.DisplayMember = "Name";
+            listBoxNotes.DataSource = _filteredNotes;
+            listBoxNotes.DisplayMember = "Name";
             UpdateNoteProperties();
         }
 
@@ -76,12 +76,12 @@ namespace NoteAppV1UI
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedCategory = comboBox1.SelectedItem.ToString();
+            string selectedCategory = comboBoxCategory.SelectedItem.ToString();
             if (selectedCategory == "Все")
             {
                 // Отображение всех заметок
-                listBox1.DataSource = Project.Notes;
-                listBox1.DisplayMember = "Name";
+                listBoxNotes.DataSource = Project.Notes;
+                listBoxNotes.DisplayMember = "Name";
             }
             else
             {
@@ -107,14 +107,14 @@ namespace NoteAppV1UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Edit_Form edit_Form = new Edit_Form(FormMode.Edit, listBox1.SelectedItem as Note);
+            Edit_Form edit_Form = new Edit_Form(FormMode.Edit, listBoxNotes.SelectedItem as Note);
             edit_Form.ShowDialog();
             UpdateNoteProperties();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Project.RemoveNote(listBox1.SelectedItem as Note);
+            Project.RemoveNote(listBoxNotes.SelectedItem as Note);
             UpdateNoteProperties();
         }
     }
