@@ -20,6 +20,7 @@ namespace NoteAppV1UI
         {
             InitializeComponent();
             InitializeComboBoxWithCategories();
+            ProjectManager.LoadFromFile<BindingList<Note>>();
             FilterNotes();
         }
 
@@ -133,5 +134,9 @@ namespace NoteAppV1UI
             _dateSortedNotes = new BindingList<Note>(_filteredNotes.OrderBy(n => n.LastModifedTime).ToList());           
         }
 
+        private void Main_Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ProjectManager.SaveToFile(Project.Notes);
+        }
     }
 }
