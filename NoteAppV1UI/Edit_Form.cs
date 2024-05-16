@@ -27,7 +27,10 @@ namespace NoteAppV1UI
             InitializeComponent();
             comboBoxCategory.DataSource = Enum.GetValues(typeof(NoteCategory));
             _mode = mode;
-            _selectedItem = selectedItem;   
+            _selectedItem = selectedItem;
+            textBoxTitle.Text = selectedItem.Name;
+            comboBoxCategory.SelectedItem = selectedItem.Category;
+            richTextBox1.Text = selectedItem.Text;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
