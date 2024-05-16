@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace NoteAppV1
 {
@@ -28,12 +29,20 @@ namespace NoteAppV1
             get { return _name; }
             set
             {
-                if (value.Length <= 50)
+                if (value.Length > 50)
+                {
+                    throw new ArgumentException();
+                }
+                if (value.Length == 0)
+                {
+                    _name = "Без названия";
+                }
+                else
                 {
                     _name = value;
-                    _lastModifiedTime = DateTime.Now;
-                    OnPropertyChanged(nameof(Name));
                 }
+                _lastModifiedTime = DateTime.Now;
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -86,18 +95,18 @@ namespace NoteAppV1
         /// </summary>
         public Note()
         {
-            _name = "Без названия";
-            _category = NoteCategory.Разное;
-            _text = "";
+            Name = "Без названия";
+            Category = NoteCategory.Разное;
+            Text = "";
             _createTime = DateTime.Now;
             _lastModifiedTime = _createTime;
         }
 
         public Note(string _name, string _category, string _text)
         {
-            this._name = _name;
-            this._category = (NoteCategory)Enum.Parse(typeof(NoteCategory), _category);
-            this._text = _text;
+            Name = _name;
+            Category = (NoteCategory)Enum.Parse(typeof(NoteCategory), _category);
+            Text = _text;
             _createTime = DateTime.Now;
             _lastModifiedTime = _createTime;
         }
